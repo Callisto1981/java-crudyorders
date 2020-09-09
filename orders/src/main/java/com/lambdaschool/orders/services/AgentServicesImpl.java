@@ -4,6 +4,7 @@ import com.lambdaschool.orders.models.Agent;
 import com.lambdaschool.orders.repositories.AgentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -18,5 +19,12 @@ public class AgentServicesImpl implements AgentServices
     {
         return agentrepos.findById(id)
             .orElseThrow(()-> new EntityNotFoundException("Id " + id + "Not found!"));
+    }
+
+    @Transactional
+    @Override
+    public void deleteAllAgents()
+    {
+        agentrepos.deleteAll();
     }
 }

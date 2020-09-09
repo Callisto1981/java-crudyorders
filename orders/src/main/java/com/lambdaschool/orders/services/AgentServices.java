@@ -5,4 +5,5 @@ import com.lambdaschool.orders.models.Agent;
 public interface AgentServices
 {
     Agent findById(long id);
+    void deleteAllAgents();
 }

@@ -9,11 +9,14 @@ import com.lambdaschool.orders.repositories.AgentRepository;
 import com.lambdaschool.orders.repositories.CustomerRepository;
 import com.lambdaschool.orders.repositories.OrderRepository;
 import com.lambdaschool.orders.repositories.PaymentRepository;
+import com.lambdaschool.orders.services.AgentServices;
+import com.lambdaschool.orders.services.PaymentServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Entity;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Random;
@@ -24,6 +27,11 @@ import java.util.Set;
 @Component
 public class SeedData implements CommandLineRunner
 {
+    @Autowired
+    private AgentServices agentServices;
+
+    @Autowired
+    private PaymentServices paymentServices;
     /**
      * Connects the customer table to this SeedData method
      */
@@ -61,6 +69,9 @@ public class SeedData implements CommandLineRunner
     @Override
     public void run(String[] args) throws Exception
     {
+        agentServices.deleteAllAgents();
+        paymentServices.deleteAllPayments();
+
         Payment pay1 = new Payment("Cash");
         Payment pay2 = new Payment("Gift Card");
         Payment pay3 = new Payment("Credit Card");
