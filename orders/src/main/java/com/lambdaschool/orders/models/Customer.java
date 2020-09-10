@@ -50,7 +50,7 @@ public class Customer
         double paymentamt,
         double outstandingamt,
         String phone,
-        Entity<Agent> agent)
+        Agent agent)
     {
         this.custname = custname;
         this.custcity = custcity;
@@ -179,13 +179,23 @@ public class Customer
         this.phone = phone;
     }
 
-    public Entity<Agent> getAgent()
+    public Agent getAgent()
     {
         return agent;
     }
 
-    public void setAgent(Entity<Agent> agent)
+    public void setAgent(Agent agent)
     {
         this.agent = agent;
+    }
+
+    public List<Order> getOrders()
+    {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders)
+    {
+        this.orders = orders;
     }
 }

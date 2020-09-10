@@ -87,4 +87,24 @@ public class Order
     {
         this.orderdescription = orderdescription;
     }
+
+    public Customer getCustomer()
+    {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer)
+    {
+        this.customer = customer;
+    }
+
+    public Set<Payment> getPayments()
+    {
+        return payments;
+    }
+
+    public void setPayments(Set<Payment> payments)
+    {
+        this.payments = payments;
+    }
 }

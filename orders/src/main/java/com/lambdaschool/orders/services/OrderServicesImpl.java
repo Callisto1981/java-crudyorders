@@ -1,7 +1,9 @@
 package com.lambdaschool.orders.services;
 
 import com.lambdaschool.orders.models.Order;
+import com.lambdaschool.orders.models.Payment;
 import com.lambdaschool.orders.repositories.OrderRepository;
+import com.lambdaschool.orders.repositories.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +14,8 @@ import javax.persistence.EntityNotFoundException;
 @Service(value = "orderServices")
 public class OrderServicesImpl implements OrderServices
 {
+    @Autowired
+    PaymentRepository paymentrepos;
     @Autowired
     OrderRepository orderrepos;
     @Override
@@ -42,5 +46,26 @@ public class OrderServicesImpl implements OrderServices
             throw new EntityNotFoundException("Order " + id + "Not found!");
         }
 
+    }
+
+    @Transactional
+    @Override
+    public Order save(Order order)
+    {
+        Order newOrder = new Order();
+        newOrder.setOrdamount(newOrder.getOrdamount());
+        newOrder.setAdvanceamount(newOrder.getAdvanceamount());
+        newOrder.setOrderdescription(newOrder.getOrderdescription());
+
+
+        newOrder.getPayments().clear();
+        for (Payment p : order.getPayments())
+        {
+            Payment newPayment = paymentrepos.findById(p.getPaymentid())
+                .orElseThrow(()-> new EntityNotFoundException("Payment " + p.getPaymentid() +  " Not Found!"));
+
+            newOrder.getPayments().add(newPayment);
+        }
+        return orderrepos.save(newOrder);
     }
 }
