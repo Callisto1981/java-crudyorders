@@ -6,4 +6,5 @@ public interface OrderServices
 {
     Order findById(long id);
     Order findAmount(double count);
+    void delete(long id);
 }

@@ -5,10 +5,7 @@ import com.lambdaschool.orders.services.AgentServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/agents")
@@ -24,4 +21,14 @@ public class AgentController
         Agent agent = agentServices.findById(agentcode);
         return new ResponseEntity<>(agent, HttpStatus.OK);
     }
+
+    //DELETE http://localhost:2019/agents/unassigned/8
+    @DeleteMapping(value = "/unassigned/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable long id)
+    {
+        agentServices.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    //DELETE http://localhost:2019/agents/unassigned/16
 }

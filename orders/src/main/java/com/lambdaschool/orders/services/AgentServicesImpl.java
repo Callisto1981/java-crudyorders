@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 
+@Transactional
 @Service(value = "agentServices")
 public class AgentServicesImpl implements AgentServices
 {
@@ -26,5 +27,18 @@ public class AgentServicesImpl implements AgentServices
     public void deleteAllAgents()
     {
         agentrepos.deleteAll();
+    }
+
+    @Override
+    public void delete(long id)
+    {
+        if (agentrepos.findById(id)
+        .isPresent())
+        {
+            agentrepos.deleteById(id);
+        } else
+        {
+            throw new EntityNotFoundException("Agent " + id + "Not found!");
+        }
     }
 }

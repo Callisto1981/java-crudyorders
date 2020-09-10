@@ -4,9 +4,11 @@ import com.lambdaschool.orders.models.Order;
 import com.lambdaschool.orders.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 
+@Transactional
 @Service(value = "orderServices")
 public class OrderServicesImpl implements OrderServices
 {
@@ -27,4 +29,18 @@ public class OrderServicesImpl implements OrderServices
 
     }
 
+    @Transactional
+    @Override
+    public void delete(long id)
+    {
+        if (orderrepos.findById(id)
+        .isPresent())
+        {
+            orderrepos.deleteById(id);
+        } else
+        {
+            throw new EntityNotFoundException("Order " + id + "Not found!");
+        }
+
+    }
 }

@@ -42,4 +42,10 @@ public class CustomerController
         Customer customer = customerServices.findByCustName(namelike);
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
+
+//    POST http://localhost:2019/customers/customer
+//    PUT http://localhost:2019/customers/customer/19
+//    PATCH http://localhost:2019/customers/customer/19
+//    DELETE http://localhost:2019/customers/customer/54
+
 }

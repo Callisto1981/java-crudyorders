@@ -34,4 +34,15 @@ public class OrderController
         Order order = orderServices.findAmount();
         return new ResponseEntity<>(order, HttpStatus.OK);
     }
+
+//    POST http://localhost:2019/orders/order
+//    PUT http://localhost:2019/orders/order/63
+//    DELETE http://localhost:2019/orders/order/58
+
+    @DeleteMapping(value = "/order/{id}")
+    public ResponseEntity<?> deleteOrderById(@PathVariable long id)
+    {
+        orderServices.delete(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
