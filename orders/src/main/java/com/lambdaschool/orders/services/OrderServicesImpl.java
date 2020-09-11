@@ -25,13 +25,13 @@ public class OrderServicesImpl implements OrderServices
             .orElseThrow(()-> new EntityNotFoundException("This order number " + id + "Not found!"));
     }
 
-    @Override
-    public Order findAmount(double count)
-    {
-        Order order = orderrepos.count(count); // need to change to long but want a double
-            return order;
-
-    }
+//    @Override
+//    public Long findAmount(long count)
+//    {
+//        Long count = orderrepos.count(count); // need to change to long but want a double
+//            return count;
+//
+//    }
 
     @Transactional
     @Override

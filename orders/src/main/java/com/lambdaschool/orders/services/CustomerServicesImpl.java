@@ -35,7 +35,7 @@ public class CustomerServicesImpl implements CustomerServices
     @Override
     public Customer findByCustName(String name)
     {
-        return customerrepos.findByCustname();
+        return customerrepos.findByCustname(name);
     }
 
     @Override
@@ -64,16 +64,30 @@ public class CustomerServicesImpl implements CustomerServices
 
         for(Order o : customer.getOrders())
         {
-            Order newOrder = new Order(o.getOrdamount(), o.getAdvanceamount(), o.getOrderdescription());
+            Order newOrder = new Order(o.getOrdamount(), o.getAdvanceamount(), o.getCustomer(), o.getOrderdescription());
 
             newOrder.getPayments().clear();
             for(Payment p : o.getPayments())
             {
                 Payment newPayment = paymentrepos.findById(p.getPaymentid())
                     .orElseThrow(()-> new EntityNotFoundException("Payment " + p.getPaymentid() + " Not Found!"));
-                newCustomer.getOrders().add(newPayment);
+                newOrder.addPayments(newPayment);
             }
         }
         return customerrepos.save(newCustomer);
+    }
+
+    @Override
+    public void delete(long custCode)
+    {
+        if(customerrepos.findById(custCode)
+        .isPresent())
+        {
+            customerrepos.deleteById(custCode);
+        }
+        else
+        {
+            throw new EntityNotFoundException("Customer " + custCode + " Not Found!");
+        }
     }
 }

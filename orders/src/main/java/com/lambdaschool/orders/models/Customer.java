@@ -34,8 +34,8 @@ public class Customer
     @JoinColumn(name = "agentcode", nullable = false)
     private Agent agent;
 
-    @OneToMany(mappedBy = "customers", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = "customers")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "customer")
     private List<Order> orders = new ArrayList<>();
 
 

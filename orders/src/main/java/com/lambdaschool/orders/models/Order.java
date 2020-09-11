@@ -37,11 +37,13 @@ public class Order
     public Order(
         double ordamount,
         double advanceamount,
+        Customer customer,
         String orderdescription)
     {
         this.ordamount = ordamount;
         this.advanceamount = advanceamount;
         this.orderdescription = orderdescription;
+        this.customer = customer;
     }
 
     public Order()
@@ -107,4 +109,11 @@ public class Order
     {
         this.payments = payments;
     }
+
+    public void addPayments(Payment payment)
+    {
+        payments.add(payment);
+        payment.getOrders().add(this);
+    }
+
 }

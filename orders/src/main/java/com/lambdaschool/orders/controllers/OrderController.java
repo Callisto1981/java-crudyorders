@@ -32,13 +32,13 @@ public class OrderController
     }
 
 
-    //http://localhost:2019/orders/advanceamount
-    @GetMapping(value = "/advanceamount", produces = "application/json")
-    public ResponseEntity<?> getAdvanceamount()
-    {
-        Order order = orderServices.findAmount();
-        return new ResponseEntity<>(order, HttpStatus.OK);
-    }
+//    //http://localhost:2019/orders/advanceamount
+//    @GetMapping(value = "/advanceamount", produces = "application/json")
+//    public ResponseEntity<?> getAdvanceamount()
+//    {
+//        Order order = orderServices.findAm;
+//        return new ResponseEntity<>(order, HttpStatus.OK);
+//    }
 
 //    POST http://localhost:2019/orders/order
     @PostMapping(value = "/order", consumes = "application/json", produces = "application/json")
