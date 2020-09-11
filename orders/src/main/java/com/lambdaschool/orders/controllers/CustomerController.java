@@ -45,11 +45,12 @@ public class CustomerController
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
-//    POST http://localhost:2019/customers/customer
+    //POST http://localhost:2019/customers/customer
     @PostMapping(value = "/customer", consumes="application/json", produces = "application/json")
     public ResponseEntity<?> addNewCustomer(@Valid
                                             @RequestBody Customer newCustomer)
     {
+        newCustomer.setCustcode(0);
         newCustomer = customerServices.save(newCustomer);//data
         HttpHeaders responseHeaders = new HttpHeaders();//creating httpHeader
 
@@ -67,9 +68,16 @@ public class CustomerController
 
 
     }
-//    PUT http://localhost:2019/customers/customer/19
-//    PATCH http://localhost:2019/customers/customer/19
-//    DELETE http://localhost:2019/customers/customer/54
+    //PUT http://localhost:2019/customers/customer/19
+    @PutMapping(value = "/customer/{custcode}", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<?> updateCustomer(@PathVariable long custcode, @Valid @RequestBody Customer updateCustomer)
+    {
+        updateCustomer.setCustcode(custcode);
+        updateCustomer = customerServices.save(updateCustomer);
+        return new ResponseEntity<>(updateCustomer, HttpStatus.OK);
+    }
+    //PATCH http://localhost:2019/customers/customer/19
+    //DELETE http://localhost:2019/customers/customer/54
     @DeleteMapping(value = "/customer/{custcode}")
     public ResponseEntity<?> deleteCustId(@PathVariable long custcode)
     {

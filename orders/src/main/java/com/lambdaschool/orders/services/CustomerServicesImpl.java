@@ -8,6 +8,7 @@ import com.lambdaschool.orders.repositories.OrderRepository;
 import com.lambdaschool.orders.repositories.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -77,6 +78,7 @@ public class CustomerServicesImpl implements CustomerServices
         return customerrepos.save(newCustomer);
     }
 
+    @Transactional
     @Override
     public void delete(long custCode)
     {
