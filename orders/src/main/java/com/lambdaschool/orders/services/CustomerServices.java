@@ -1,0 +1,12 @@
+package com.lambdaschool.orders.services;
+
+import com.lambdaschool.orders.models.Customer;
+
+public interface CustomerServices
+{
+    Customer save(Customer customer);
+    Customer findAllOrders();
+    Customer findById(long custCode);
+    Customer findByCustName(String name);
+    void delete(long custCode);
+}
